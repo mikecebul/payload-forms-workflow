@@ -2,7 +2,7 @@ import { mongooseAdapter } from '@payloadcms/db-mongodb'
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
-import { buildConfig } from 'payload'
+import { buildConfig, Field } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 
@@ -29,5 +29,28 @@ export default buildConfig({
     url: process.env.DATABASE_URI || '',
   }),
   sharp,
-  plugins: [formBuilderPlugin({})],
+  plugins: [
+    formBuilderPlugin({
+      formOverrides: {
+        admin: {
+          useAsTitle: 'form',
+        },
+        fields: ({ defaultFields }) => {
+          const formField: Field = {
+            name: 'form',
+            type: 'select',
+            options: [{ label: 'Contact', value: 'contact' }],
+          }
+          const rest = defaultFields.filter(
+            (field) =>
+              'name' in field &&
+              field.name !== 'title' &&
+              field.name !== 'fields' &&
+              field.name !== 'submitButtonLabel',
+          )
+          return [formField, ...rest]
+        },
+      },
+    }),
+  ],
 })
