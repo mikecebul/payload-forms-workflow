@@ -15,10 +15,10 @@
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start"
   },
   "dependencies": {
-    "@payloadcms/db-mongodb": "3.28.0",
-    "@payloadcms/next": "3.28.0",
-    "@payloadcms/plugin-form-builder": "3.28.0",
-    "@payloadcms/richtext-lexical": "3.28.0",
+    "@payloadcms/db-mongodb": "3.28.1",
+    "@payloadcms/next": "3.28.1",
+    "@payloadcms/plugin-form-builder": "3.28.1",
+    "@payloadcms/richtext-lexical": "3.28.1",
     "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.2",
     "@tailwindcss/postcss": "^4.0.13",
@@ -29,7 +29,7 @@
     "graphql": "^16.8.1",
     "lucide-react": "^0.479.0",
     "next": "15.2.2",
-    "payload": "3.28.0",
+    "payload": "3.28.1",
     "postcss": "^8.5.3",
     "react": "19.0.0",
     "react-dom": "19.0.0",

@@ -158,7 +158,7 @@ export interface Media {
  */
 export interface Form {
   id: string;
-  form?: 'contact' | null;
+  type?: 'contact' | null;
   /**
    * Choose whether to display an on-page message or redirect to a different page after they submit the form.
    */
@@ -222,13 +222,16 @@ export interface Form {
  */
 export interface FormSubmission {
   id: string;
-  form: string | Form;
+  formType?: string | null;
+  title?: string | null;
   submissionData?:
     | {
-        field: string;
-        value: string;
-        id?: string | null;
-      }[]
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
     | null;
   updatedAt: string;
   createdAt: string;
@@ -336,7 +339,7 @@ export interface MediaSelect<T extends boolean = true> {
  * via the `definition` "forms_select".
  */
 export interface FormsSelect<T extends boolean = true> {
-  form?: T;
+  type?: T;
   confirmationType?: T;
   confirmationMessage?: T;
   redirect?:
@@ -364,14 +367,9 @@ export interface FormsSelect<T extends boolean = true> {
  * via the `definition` "form-submissions_select".
  */
 export interface FormSubmissionsSelect<T extends boolean = true> {
-  form?: T;
-  submissionData?:
-    | T
-    | {
-        field?: T;
-        value?: T;
-        id?: T;
-      };
+  formType?: T;
+  title?: T;
+  submissionData?: T;
   updatedAt?: T;
   createdAt?: T;
 }

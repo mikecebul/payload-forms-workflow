@@ -33,11 +33,11 @@ export default buildConfig({
     formBuilderPlugin({
       formOverrides: {
         admin: {
-          useAsTitle: 'form',
+          useAsTitle: 'type',
         },
         fields: ({ defaultFields }) => {
           const formField: Field = {
-            name: 'form',
+            name: 'type',
             type: 'select',
             options: [{ label: 'Contact', value: 'contact' }],
           }
@@ -49,6 +49,35 @@ export default buildConfig({
               field.name !== 'submitButtonLabel',
           )
           return [formField, ...rest]
+        },
+      },
+      formSubmissionOverrides: {
+        admin: {
+          useAsTitle: 'title',
+        },
+        fields: () => {
+          return [
+            {
+              name: 'formType',
+              type: 'text',
+            },
+            {
+              name: 'title',
+              type: 'text',
+              admin: {
+                hidden: true,
+              },
+            },
+            {
+              name: 'submissionData',
+              type: 'json',
+              admin: {
+                components: {
+                  Field: '@/components/FormData',
+                },
+              },
+            },
+          ]
         },
       },
     }),
